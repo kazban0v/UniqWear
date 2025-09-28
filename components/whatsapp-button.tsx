@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 export function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false)
   const whatsappNumber = "77068066636" // Your number in international format (92 for Pakistan)
-  const message = "Привет! Меня интересуют ваши аниме-футболки. Можете мне помочь?"
+  const message = "Привет! Меня интересуют ваши IT-футболки. Можете мне помочь?"
 
   const handleWhatsAppClick = () => {
     const encodedMessage = encodeURIComponent(message)
