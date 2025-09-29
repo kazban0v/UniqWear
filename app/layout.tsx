@@ -40,13 +40,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} />
+      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=G-5D5L12BPJQ`} />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX');
+          gtag('config', 'G-5D5L12BPJQ');
         `}
       </Script>
       <body className={`${poppins.className}`}>
