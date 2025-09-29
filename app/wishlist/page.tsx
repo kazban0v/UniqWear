@@ -53,7 +53,7 @@ export default function WishlistPage() {
           <Heart className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
           <h1 className="text-2xl font-bold mb-4">Ваш список желаний пуст</h1>
           <p className="text-muted-foreground mb-8">
-            Сохраните свои любимые аниме футболки в список желаний и никогда не теряйте их из виду.
+            Сохраните свои любимые футболки в список желаний и никогда не теряйте их из виду.
           </p>
           <Link href="/shop">
             <Button size="lg">Начать покупки</Button>
