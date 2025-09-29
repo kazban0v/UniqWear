@@ -27,14 +27,14 @@ export function Footer() {
             <div className="flex space-x-4">
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href="https://www.instagram.com/uniq1wear?igsh=MWs2OHk0aGludHJubQ=="
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Instagram className="w-5 h-5" />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href="https://www.tiktok.com/@uniqwear_?_t=ZM-9080wrWZXyu&_r=1"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -76,22 +76,22 @@ export function Footer() {
             <h3 className="font-semibold">Служба поддержки</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="https://wa.me/77068066636" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   Связаться с нами
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/delivery" className="text-muted-foreground hover:text-primary transition-colors">
                   Информация о доставке
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/returns" className="text-muted-foreground hover:text-primary transition-colors">
                   Возвраты и обмены
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/size-chart" className="text-muted-foreground hover:text-primary transition-colors">
                   Таблица размеров
                 </Link>
               </li>
