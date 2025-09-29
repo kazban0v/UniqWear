@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import { Toaster } from "sonner"
+import { Analytics } from '@vercel/analytics/react'
 import { ThemeProvider } from "@/components/theme-provider"
 import { PromotionalBanner } from "@/components/promotional-banner"
 import { Navbar } from "@/components/navbar"
@@ -48,6 +49,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
           <Toaster position="bottom-right" />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

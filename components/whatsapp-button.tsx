@@ -28,7 +28,7 @@ export function WhatsAppButton() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         className="relative bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-        aria-label="Chat with us on WhatsApp"
+        aria-label="Напишите нам в WhatsApp"
       >
         {/* WhatsApp Icon */}
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
