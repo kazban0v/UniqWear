@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import { Toaster } from "sonner"
 import { Analytics } from '@vercel/analytics/react'
+import Script from 'next/script'
 import { ThemeProvider } from "@/components/theme-provider"
 import { PageTransition } from "@/components/page-transition"
 import { PromotionalBanner } from "@/components/promotional-banner"
@@ -39,6 +40,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX');
+        `}
+      </Script>
       <body className={`${poppins.className}`}>
         <ThemeProvider>
           <PromotionalBanner />

@@ -15,16 +15,16 @@ export default function WishlistPage() {
 
   const handleRemoveFromWishlist = (productId: string, productName: string) => {
     removeItem(productId)
-    toast.success(`${productName} removed from wishlist`)
+    toast.success(`${productName} удалено из списка желаний`)
   }
 
   const handleAddToCart = (product: any) => {
     const availableSize = product.sizes.find((size: any) => size.available)
     if (availableSize) {
       addToCart(product, availableSize.size)
-      toast.success(`${product.name} added to cart!`)
+      toast.success(`${product.name} добавлено в корзину!`)
     } else {
-      toast.error("No sizes available")
+      toast.error("Размеры недоступны")
     }
   }
 
@@ -39,10 +39,10 @@ export default function WishlistPage() {
     })
 
     if (addedCount > 0) {
-      toast.success(`${addedCount} items moved to cart!`)
+      toast.success(`${addedCount} товары перемещены в корзину!`)
       clearWishlist()
     } else {
-      toast.error("No items could be added to cart")
+      toast.error("Не удалось добавить ни одного товара в корзину.")
     }
   }
 
