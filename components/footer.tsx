@@ -68,6 +68,11 @@ export function Footer() {
                   Избранное
                 </Link>
               </li>
+              <li>
+                <Link href="/faq" className="text-muted-foreground hover:text-primary transition-colors">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 

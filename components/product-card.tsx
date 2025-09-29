@@ -64,6 +64,7 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.image || "/images/t1.jpg"}
             alt={product.name}
             fill
+            loading="lazy"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
 

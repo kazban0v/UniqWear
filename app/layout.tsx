@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google"
 import { Toaster } from "sonner"
 import { Analytics } from '@vercel/analytics/react'
 import { ThemeProvider } from "@/components/theme-provider"
+import { PageTransition } from "@/components/page-transition"
 import { PromotionalBanner } from "@/components/promotional-banner"
 import { Navbar } from "@/components/navbar"
 import { FeaturesSection } from "@/components/features-section"
@@ -42,10 +43,12 @@ export default function RootLayout({
         <ThemeProvider>
           <PromotionalBanner />
           <Navbar />
-          <main>
-            {children}
-            <FeaturesSection />
-          </main>
+          <PageTransition>
+            <main>
+              {children}
+              <FeaturesSection />
+            </main>
+          </PageTransition>
           <Footer />
           <WhatsAppButton />
           <Toaster position="bottom-right" />

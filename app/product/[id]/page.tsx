@@ -97,9 +97,39 @@ export default function ProductPage() {
     )
   }
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "image": product.image,
+    "brand": {
+      "@type": "Brand",
+      "name": "UniqWear"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": product.price,
+      "priceCurrency": "KZT",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "UniqWear"
+      }
+    },
+    "category": product.anime
+  }
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
+        }}
+      />
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Product Image */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -161,5 +191,6 @@ export default function ProductPage() {
         </motion.div>
       </div>
     </div>
+    </>
   )
 }

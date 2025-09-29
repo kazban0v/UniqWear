@@ -20,7 +20,7 @@ export default function DeliveryPage() {
         </ul>
         <h2 className="text-2xl font-semibold mb-4">Стоимость доставки</h2>
         <p className="mb-4">
-          Бесплатная доставка при заказе от 10 000 тенге. Для заказов меньше 10 000 тенге стоимость доставки рассчитывается индивидуально.
+          Бесплатная доставка 
         </p>
         <h2 className="text-2xl font-semibold mb-4">Способы доставки</h2>
         <ul className="list-disc list-inside mb-4">

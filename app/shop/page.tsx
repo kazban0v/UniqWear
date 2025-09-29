@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ProductCard } from "@/components/product-card"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Search } from "lucide-react"
 import type { Product } from "@/types"
 import { getProducts, animeCategories } from "@/lib/products"
 
@@ -11,7 +14,10 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [sortBy, setSortBy] = useState("name")
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -19,8 +25,10 @@ export default function ShopPage() {
         const allProducts = await getProducts()
         setProducts(allProducts)
         setFilteredProducts(allProducts)
+        setError(null)
       } catch (error) {
         console.error("Error loading products:", error)
+        setError("Не удалось загрузить товары. Попробуйте позже.")
       } finally {
         setLoading(false)
       }
@@ -30,12 +38,32 @@ export default function ShopPage() {
   }, [])
 
   useEffect(() => {
-    if (selectedCategory === "All") {
-      setFilteredProducts(products)
-    } else {
-      setFilteredProducts(products.filter((product) => product.anime === selectedCategory))
+    let filtered = products
+
+    // Filter by category
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter((product) => product.anime === selectedCategory)
     }
-  }, [selectedCategory, products])
+
+    // Filter by search
+    if (searchQuery) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.anime.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
+
+    // Sort
+    filtered = [...filtered].sort((a, b) => {
+      if (sortBy === "price-low") return a.price - b.price
+      if (sortBy === "price-high") return b.price - a.price
+      if (sortBy === "name") return a.name.localeCompare(b.name)
+      return 0
+    })
+
+    setFilteredProducts(filtered)
+  }, [selectedCategory, searchQuery, sortBy, products])
 
   if (loading) {
     return (
@@ -61,6 +89,16 @@ export default function ShopPage() {
     )
   }
 
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl font-bold mb-4">Ошибка загрузки</h1>
+        <p className="text-muted-foreground mb-4">{error}</p>
+        <Button onClick={() => window.location.reload()}>Попробовать снова</Button>
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -68,24 +106,50 @@ export default function ShopPage() {
         <p className="text-muted-foreground text-lg">Погрузитесь в мир IT футболок — стиль, написанный на языке кода.</p>
       </motion.div>
 
-      {/* Category Filter */}
+      {/* Search and Filters */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="mb-8"
+        className="mb-8 space-y-4"
       >
-        <div className="flex flex-wrap gap-2">
-          {animeCategories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className="mb-2"
-            >
-              {category}
-            </Button>
-          ))}
+        {/* Search */}
+        <div className="relative max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            placeholder="Поиск товаров..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-2">
+            {animeCategories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category)}
+                size="sm"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
+          {/* Sort */}
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="Сортировка" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="name">По названию</SelectItem>
+              <SelectItem value="price-low">Цена: низкая → высокая</SelectItem>
+              <SelectItem value="price-high">Цена: высокая → низкая</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </motion.div>
 
